@@ -1,0 +1,39 @@
+import * as React from 'react';
+
+import styles from './Node.module.css';
+import { MODIFY_MODE, TNode } from '../types';
+
+function Node(props: TNode) {
+  const { id, x, y, text, modifyMode } = props;
+  const [nodeText, setNodeText] = React.useState(text);
+  const [mode, setMode] = React.useState(modifyMode);
+
+  const onDoubleClick = (e: any) => {
+    setMode(MODIFY_MODE.ON);
+  };
+
+  const onChangeNodeText = (e: any) => {
+    setNodeText(e.target.value);
+  };
+
+  return (
+    <div
+      id={id}
+      onDoubleClick={onDoubleClick}
+      className={styles.node}
+      style={{ left: x, top: y }}
+    >
+      <div className={styles.nodeInputWrapper}>
+        <input
+          className={styles.nodeInput}
+          type="text"
+          value={nodeText}
+          disabled={mode === MODIFY_MODE.OFF}
+          onChange={onChangeNodeText}
+        />
+      </div>
+    </div>
+  );
+}
+
+export default Node;

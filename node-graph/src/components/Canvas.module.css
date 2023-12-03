@@ -1,0 +1,8 @@
+.canvas {
+  width: 80vw;
+  height: 60vw;
+
+  border: 1px solid #c2c2c2;
+
+  position: relative;
+}
