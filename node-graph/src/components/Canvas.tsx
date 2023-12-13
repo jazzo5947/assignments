@@ -5,14 +5,18 @@ type CanvasProps = {
   children: React.ReactNode;
 };
 
-function Canvas({ children }: CanvasProps) {
-  React.useEffect(() => {}, []);
+const Canvas = React.forwardRef<HTMLDivElement, CanvasProps>(
+  (props: CanvasProps, ref) => {
+    const { children } = props;
 
-  return (
-    <div id="canvas" className={styles.canvas}>
-      {children}
-    </div>
-  );
-}
+    React.useEffect(() => {}, []);
+
+    return (
+      <div ref={ref} id="canvas" className={styles.canvas}>
+        {children}
+      </div>
+    );
+  }
+);
 
 export default Canvas;
