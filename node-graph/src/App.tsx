@@ -1,13 +1,15 @@
 import * as React from 'react';
 
-import styles from './App.module.css';
+import { useRecoilState } from 'recoil';
+
+import { NodeListState } from './context/NodeListContext';
+import { CanvasState } from './context/CanvasContext';
+
 import Canvas from './components/Canvas';
 import Node from './components/Node';
 import NodeList from './components/NodeList';
-import { MODIFY_MODE, TNode } from './types';
-import { useRecoilState } from 'recoil';
-import { NodeListState } from './context/NodeContext';
-import { CanvasState } from './context/CanvasContext';
+import AddBtn from './components/AddBtn';
+import styles from './App.module.css';
 
 // todo: 다른 노드에 드랍하면 두 노드가 연결됨
 // todo: 노드 꾸미기: 가장자리 마우스오버 - 엣지포인트
@@ -29,33 +31,16 @@ function App() {
     }
   }, []);
 
-  const onClickAddBtn = (e: any) => {
-    const newIdx = nodeList.length + 1;
-    const newNode: TNode = {
-      id: newIdx + '',
-      x: newIdx * 5,
-      y: newIdx * 5,
-      text: '',
-      modifyMode: MODIFY_MODE.OFF,
-    };
-
-    setNodeList(prev => {
-      return [...prev, newNode];
-    });
-  };
-
   return (
     <div className="App">
       <div className={styles.titleWrapper}>
         <h1>Node Graph</h1>
-        <button className={styles.addButton} onClick={onClickAddBtn}>
-          +
-        </button>
+        <AddBtn />
       </div>
       <div style={{ display: 'flex', gap: '20px' }}>
         <Canvas ref={canvasRef}>
           {nodeList.map(node => (
-            <Node key={node.id} {...node} />
+            <Node key={node.id + ''} {...node} />
           ))}
         </Canvas>
         <NodeList />

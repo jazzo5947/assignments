@@ -10,6 +10,11 @@
   background-color: white;
 }
 
+.clickedNode {
+  background-color: silver;
+  border: 4px;
+}
+
 .nodeInputWrapper {
   width: inherit;
   height: inherit;
